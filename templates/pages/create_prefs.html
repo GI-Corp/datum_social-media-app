@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Create Preferences {% endblock %}
+
+{% block content %}
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title text-uppercase font-medium font-14">Profile Preferences</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="d-md-flex">
+                            <ol class="breadcrumb ml-auto">
+                                <li><a href="#">Update preference details</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <div class="container-fluid">
+                <!-- Row -->
+                <div class="row">
+
+                <!-- Alerts -->
+                {% include 'partials/_alerts.html' %}
+
+                    <!-- Profile form -->
+                    <div class="col-lg-7 col-xlg-9 col-md-12" style="width: 100%;margin-left: auto;margin-right: auto;display: inline-block">
+                        <div class="card">
+                            <div class="card-body">
+                            <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data" action="{% url 'create_prefs' %}">
+                                {% csrf_token %}
+                                <h3>Update preference details</h3>
+                                <hr>
+                                    <!-- Preferences form -->
+                                    {{ form|crispy }}
+                                    <div class="form-group mb-4">
+                                        <div class="col-sm-12 p-0">
+                                            <input type="submit" class="btn btn-success">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+            </div>
+{% endblock %}

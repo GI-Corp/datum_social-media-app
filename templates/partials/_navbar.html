@@ -1,0 +1,40 @@
+{% load static %}
+
+<aside class="left-sidebar" data-sidebarbg="skin6">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
+                <!-- User Profile-->
+                {% if user.is_staff %}
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                            href="{% url 'admin:index' %}" aria-expanded="false">
+                            <i class="fa fa-star" aria-hidden="true"></i><span class="hide-menu">Admin Panel</span></a>
+                    </li>
+                {% endif %}
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{% url 'index' %}" aria-expanded="false"><i class="fas fa-address-card fa-fw"
+                            aria-hidden="true"></i><span class="hide-menu">Homepage</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{% url 'dashboard' %}" aria-expanded="false"><i class="fas fa-heart fa-fw"
+                            aria-hidden="true"></i><span class="hide-menu">Matches</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{% url 'profile' %}" aria-expanded="false">
+                        <i class="fa fa-user" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
+                </li>
+                <li class="sidebar-item">
+                        <a  class="sidebar-link waves-effect waves-dark sidebar-link" href="javascript:{document.getElementById('logout').submit()}" aria-expanded="false">
+                        <i class="fa fa-power-off" aria-hidden="true"></i><span class="hide-menu">Logout</span></a>
+                        <form action="{% url 'logout' %}" method="POST" id="logout">
+                      {% csrf_token %}
+                      <input type="hidden">
+                    </form>
+                </li>
+            </ul>
+
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>

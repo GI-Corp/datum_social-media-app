@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title text-uppercase font-medium font-14">Profile page</h4>
+                    </div>
+                  {% if profile_does_not_exists == False and preference_does_not_exists == False %}
+
+                            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                                <div class="d-md-flex">
+                                    <ol class="breadcrumb ml-auto">
+                                        <li><a href="{% url 'profile_details' profile.id %}" class="btn btn-md btn-primary text-white"> Profile details</a></li>
+                                        <li> &nbsp; </li>
+                        {% for profile in profiles %}
+                                        <li><a href="{% url 'update_profile' profile.id %}" class="btn btn-md btn-primary text-white"> Update Profile</a></li>
+                        {% endfor %}
+                                        <li> &nbsp; </li>
+                        {% for preference in preferences %}
+                                        <li><a href="{% url 'update_prefs' preference.id %}" class="btn btn-md btn-primary text-white"> Update Preferences</a></li>
+                        {% endfor %}
+                                    </ol>
+                                </div>
+                            </div>
+                  {% else %}
+                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="d-md-flex">
+                            <ol class="breadcrumb ml-auto">
+                                <li><a href="{% url 'create_profile' %}" class="btn btn-md btn-primary text-white"> Create Profile</a></li>
+                                <li> &nbsp; </li>
+                                <li><a href="{% url 'create_prefs' %}" class="btn btn-md btn-primary text-white"> Create Preferences</a></li>
+                            </ol>
+                            </div>
+                        </div>
+                  {% endif %}
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <div class="container-fluid">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+
+                <!-- Alerts -->
+                {% include 'partials/_alerts.html' %}
+                
+                    <div class="col-lg-4 col-xlg-3 col-md-12">
+                        <div class="white-box">
+                            <div class="user-bg"> <img width="100%" alt="user" src="{% static 'plugins/images/users/3.jpg' %}">
+                                <div class="overlay-box">
+                                    <div class="user-content">
+                                        <h5 class="text-white mt-0">User brief info</h5>
+                                        <h2 class="text-white mt-2">{{user.first_name}} {{user.last_name}}</h2>
+                                        <h4 class="text-white mt-2">{{user.username}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xlg-3 col-md-12">
+                        <div class="white-box">
+                            <div class="user-bg"> 
+                                <div class="overlay-box">
+                                    <div class="user-content">
+                                        {% if profile_does_not_exists == False and preference_does_not_exists == False %}
+                                            <h3 class="text-white mt-0">To see more details</h3>
+                                            <div class="col-md-12 border-bottom p-0"></div>
+                                            <h4 class="text-white mt-2"></h5>
+                                            <h5 class="text-white mt-2">you gotta match the person</h5>
+                                            <div class="col-md-12 border-bottom p-3"><a href="{% url 'dashboard' %}" class="btn btn-md btn-success text-white"> See your matches</a></div>
+                                        {% else %}
+                                            <h3 class="text-white mt-0">Please, fill the forms below</h3>
+                                            <div class="col-md-12 border-bottom p-0"></div>
+                                            <h4 class="text-white mt-2"></h5>
+                                            <h5 class="text-white mt-2">Profile details, Your preferences</h5>
+                                            <div class="col-md-12 border-bottom p-3"><a href="{% url 'create_profile' %}" class="btn btn-md btn-success text-white">Your profile details</a> <a href="{% url 'create_prefs' %}" class="btn btn-md btn-success text-white">Your preferences</a></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+            </div>
+
+    <!-- Pagination -->
+    {% if prfoile.has_other_pages %}
+    <ul class="pagination">
+      {% if prfoile.has_previous %}
+        <li class="page-item">
+          <a href="?page={{prfoile.previous_page_number}}" class="page-link">&laquo;</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link">&laquo;</a>
+        </li>
+      {% endif %}
+      {% for i in prfoile.paginator.page_range %}
+        {% if prfoile.number == i %}
+          <li class="page-item active">
+            <a class="page-link">{{i}}</a>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a href="?page={{i}}" class="page-link">{{i}}</a>
+          </li>
+        {% endif %} 
+      {% endfor %}
+      
+      {% if prfoile.has_next %}
+        <li class="page-item">
+          <a href="?page={{prfoile.next_page_number}}" class="page-link">&raquo;</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link">&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+    {% else %}
+
+    {% endif%}
+{% endblock %}

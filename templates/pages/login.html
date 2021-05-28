@@ -1,0 +1,73 @@
+{% extends 'base_no_access.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+            <div class="container-fluid">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Profile form -->
+                    <div class="col-lg-5 col-xlg-9 col-md-12" style="width: 100%;margin-left: auto;margin-right: auto;display: inline-block">
+
+                        <!-- Alerts -->
+                        {% include 'partials/_alerts.html' %}
+
+                        <div class="navbar-header text-center">
+                                <a class="navbar-brand" href="#">
+                                    <!-- Logo icon -->
+                                    <b class="logo-icon">
+                                        <!-- Dark Logo icon -->
+                                    </b>
+                                    <!--End Logo icon -->
+                                    <!-- Logo text -->
+                                    <span class="logo-text">
+                                        <!-- dark Logo text -->
+                                    </span>
+                                </a>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                        <div class="text-center">
+                            <img src="{% static 'plugins/images/logo-icon.png' %}" alt="homepage">
+                            <img src="{% static 'plugins/images/logo-text.png' %}" alt="homepage">
+                            <hr>
+                                <h3>Login Page</h3>
+                        </div>
+                            <br/>
+                                <form class="form-horizontal form-material" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group mb-4">
+                                        <label for="tg_username" class="col-md-12 p-0">Telegram username</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="username" placeholder="@gi_corp"
+                                                class="form-control p-0 border-0" name="tg_username"
+                                                id="tg_username">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0" for="password">Password</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="password" name="password" id="password" class="form-control p-0 border-0" placeholder="*****">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <div class="col-sm-12 p-0">
+                                            <input type="submit" class="btn btn-success">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>Don't have an account? <a href="{% url 'register' %}"> Sign up</a></p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+            </div>
+{% endblock %}

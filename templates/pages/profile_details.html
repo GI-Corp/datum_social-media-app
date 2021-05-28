@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Profile Details {% endblock %}
+
+{% block content %}
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title text-uppercase font-medium font-14">Profile page</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="d-md-flex">
+                            <ol class="breadcrumb ml-auto">
+                                <li><a href="{% url 'profile' %}" class="btn btn-md btn-primary text-white"> Back to profile</a></li>
+                                <li> &nbsp; </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <div class="container-fluid">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+
+                <!-- Alerts -->
+                {% include 'partials/_alerts.html' %}
+                
+                    <div class="col-lg-4 col-xlg-3 col-md-12">
+                        <div class="white-box">
+                            <div class="user-bg"> <img width="100%" alt="user" src="{% static 'plugins/images/users/3.jpg' %}">
+                                <div class="overlay-box">
+                                    <div class="user-content">
+                                        <a href="javascript:void(0)"><img src="{{profile.photo.url}}"
+                                                class="thumb-lg img-circle" alt="img"></a>
+                                        <h4 class="text-white mt-2">{{profile.first_name}} {{profile.last_name}}</h4>
+                                        <h5 class="text-white mt-2">{{profile.tg_username}}</h5>
+                                        <h5 class="text-white mt-2">{{profile.bio}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xlg-3 col-md-12">
+                        <div class="white-box">
+                            <div class="user-bg"> 
+                                <div class="overlay-box">
+                                    <div class="user-content">
+                                        <h3 class="text-white mt-0">Preferences</h3>
+                                        <div class="col-md-12 border-bottom p-0"></div>
+                                        <h4 class="text-white mt-2">Age</h5>
+                                        <h5 class="text-white mt-2">{{preference.pref_min_age}} - {{preference.pref_max_age}}</h5>
+                                        <h4 class="text-white mt-2">Interests</h5>
+                                        <h5 class="text-white mt-2">{{profile.display_interests}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+
+                    <!-- Profile form -->
+                    <div class="col-lg-12 col-xlg-9 col-md-12" style="width: 100%;margin-left: auto;margin-right: auto;display: inline-block">
+                        <div class="card">
+                            <div class="card-body">
+                                <form class="form-horizontal form-material" >
+                                <h3>Profile details</h3>
+                                <hr>
+                                    <div class="form-group mb-4">
+                                        <label for="telegram_username" class="col-md-12 p-0">Telegram username</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <p class="form-control p-0 border-0" >{{profile.tg_username}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0">First name</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <p class="form-control p-0 border-0" >{{profile.first_name}}</p>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0">Last name</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <p class="form-control p-0 border-0" >{{profile.last_name}}</p>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0">Date of birth</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <p class="form-control p-0 border-0" >{{profile.birthdate}}</p>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-sm-12 p-0">Gender</label>
+                                        <div class="col-sm-12 border-bottom p-0">
+                                            <p class="form-control p-0 border-0" >{{profile.gender}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-sm-12 p-0">Interests</label>
+                                        <div class="col-sm-12 border-bottom p-0">
+                                            <p class="form-control border-0 " >{{profile.display_interests}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0">Bio </label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <p class="form-control p-0 border-0" >{{profile.bio}}</p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+            </div>
+{% endblock %}

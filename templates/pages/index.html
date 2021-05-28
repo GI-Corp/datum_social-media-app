@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} Homepage {% endblock %}
+
+{% block content %}
+
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title text-uppercase font-medium font-14">Homepage</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="d-md-flex">
+                            <ol class="breadcrumb ml-auto">
+                                <li class="btn btn-md btn-success text-white">Total number of matches: {{user_numbers}} &nbsp;</li>
+                                <li> &nbsp; </li>
+                                <li><a href="{% url 'dashboard' %}" class="btn btn-md btn-primary text-white"> Your matches</a></li>
+                                <li> &nbsp; </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+        {% if matches %}
+        <div class="container-fluid col-lg-4 col-xlg-7 col-md-12">
+            <!-- Alerts -->
+            {% include 'partials/_alerts.html' %}
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" style="width: 100%;margin-left: auto;margin-right: auto;display: inline-block"
+            >
+            <div class="carousel-item active">
+            <div class="white-box">
+                <h4 class="text-dark mt-3 text-center">Swipe left to explore new users</h4>
+            </div>
+            </div>
+            {% for match in matches %}
+                <div class="carousel-item" >
+                    <div class="container-fluid">
+                    <div class="center" >
+                        <div class="row">
+
+                              <div class="container">
+
+                                <div class="white-box">
+                                    <div> <img width="100%" alt="user" src="{{match.photo.url}}">
+                                        <div class="overlay-box">
+                                            <div class="user-content">
+                                                <h4 class="text-dark mt-3 text-center">{{match.first_name}}, {{match.get_age}}</h4>
+                                                <h5 class="text-dark mt-2 text-center">{{match.bio}}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="user-btm-box mt-3 d-md-flex">
+                                        <div class="col-md-4 col-sm-4 text-center">
+                                            <h5>{{match.display_interests}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div>
+                                    &nbsp;
+                                    <input name="user_id" value={{match.user_id}} hidden></input>
+                                    <input type="submit" name="Skip" class="btn btn-lg btn-danger text-white" style="width:46%;" value="Skip" >
+                                    &nbsp;
+                                    <input type="submit" name="Like" class="btn btn-lg btn-success text-white" style="width:46%;" value="Like" >
+                                </div>
+                            </form>
+
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+            {% endfor %}
+
+            </div>
+            <a class="carousel-control-prev btn btn-primary btn-circle" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next btn btn-primary btn-circle" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            </div>
+            </div>
+            </div>
+        {% else %}
+            <div class="container-fluid">
+                <div class="center" >
+                    <div class="row">
+                        <div class="col-lg-12 col-xlg-7 col-md-12">
+                            <p class="white-box">Nobody suits to your preferences, sorry.</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        {% endif %}
+
+{% endblock %}

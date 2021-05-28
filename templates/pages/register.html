@@ -1,0 +1,92 @@
+{% extends 'base_no_access.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+
+{% block title %} Register {% endblock %}
+
+{% block content %}
+
+            <div class="container-fluid">
+                <!-- Row -->
+                <div class="row">
+                    <!-- Profile form -->
+                    <div class="col-lg-5 col-xlg-9 col-md-12" style="width: 100%;margin-left: auto;margin-right: auto;display: inline-block">
+
+                        <!-- Alerts -->
+                        {% include 'partials/_alerts.html' %}
+
+                        <div class="navbar-header text-center">
+                                <a class="navbar-brand" href="#">
+                                    <!-- Logo icon -->
+                                    <b class="logo-icon">
+                                        <!-- Dark Logo icon -->
+                                    </b>
+                                    <!--End Logo icon -->
+                                    <!-- Logo text -->
+                                    <span class="logo-text">
+                                        <!-- dark Logo text -->
+                                    </span>
+                                </a>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                        <div class="text-center">
+                            <img src="{% static 'plugins/images/logo-icon.png' %}" alt="homepage">
+                            <img src="{% static 'plugins/images/logo-text.png' %}" alt="homepage">
+                            <hr>
+                                <h3>Registration Page</h3>
+                                <p>Already got an account? <a href="{% url 'login' %}">Sign in</a></p>
+                        </div>
+
+                            <br/>
+                                <form class="form-horizontal form-material" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-group mb-4">
+                                        <label for="tg_username" class="col-md-12 p-0">Telegram username</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="username" placeholder="gi_corp"
+                                                class="form-control p-0 border-0" name="tg_username"
+                                                id="tg_username">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0" for="first_name">First name</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="text" placeholder="Islom" name="first_name"
+                                                class="form-control p-0 border-0" id="first_name"> </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0" for="last_name">Last name</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="text" placeholder="Gulomkodirov" name="last_name"
+                                                class="form-control p-0 border-0" id="last_name"> </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0" for="password">Password</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="password" placeholder="*****" class="form-control p-0 border-0" id="password" name="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label class="col-md-12 p-0" for="password2">Confirm password</label>
+                                        <div class="col-md-12 border-bottom p-0">
+                                            <input type="password" placeholder="*****" class="form-control p-0 border-0" id="password2" name="password2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <div class="col-sm-12 p-0">
+                                            <input type="submit" class="btn btn-success">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+            </div>
+{% endblock %}

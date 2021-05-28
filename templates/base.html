@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="datum">
+    <meta name="description"
+        content="datum dating app">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Datum |{% block title %} {% endblock title %}</title>
+    <link rel="canonical" href="https://github.com/GI-Corp" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'plugins/images/favicon.png' %}">
+    <!-- Custom CSS -->
+   <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+{% if user.is_authenticated %}
+
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+
+        <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+            data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+            
+        {% include 'partials/_topbar.html' %}
+        {% include 'partials/_navbar.html' %}
+
+            <div class="page-wrapper">
+
+                {% block content %}
+                
+                {% endblock content %}
+
+                {% include 'partials/_footer.html' %}
+                
+            </div>
+        </div>
+
+        <!-- All Jquery -->
+        <script src="{% static 'plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="{% static 'plugins/bower_components/popper.js/dist/umd/popper.min.js' %}"></script>
+        <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/app-style-switcher.js' %}"></script>
+        <!--Wave Effects -->
+        <script src="{% static 'js/waves.js' %}"></script>
+        <!--Menu sidebar -->
+        <script src="{% static 'js/sidebarmenu.js' %}"></script>
+        <!--Custom JavaScript -->
+        <script src="{% static 'js/custom.js' %}"></script>
+
+{% else %}
+
+    {% include 'partials/no_access.html' %}
+    
+{% endif %}
+</body>
+
+</html>
